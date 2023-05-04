@@ -55,3 +55,13 @@ const posts = [
         "created": "2021-03-05"
     }
 ];
+
+let container = document.getElementById("container");
+
+for (let i = 0; i < posts.length; i++) {
+
+    let post;
+    post.innerhtml = `<div class="post"></div>`;
+    container.appendChild(post)
+    
+}
