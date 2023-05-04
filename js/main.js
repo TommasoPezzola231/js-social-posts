@@ -59,9 +59,9 @@ const posts = [
 let container = document.getElementById("container");
 
 for (let i = 0; i < posts.length; i++) {
-
-    let post;
-    post.innerhtml = `<div class="post"></div>`;
+    let post = createElement("div")
+    console.log(post)
+    post.innerhtml += `<div class="post"></div>`;
+    console.log(post)
     container.appendChild(post)
-    
 }
