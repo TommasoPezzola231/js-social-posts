@@ -79,17 +79,45 @@ for (let i = 0; i < posts.length; i++) {
                         <div class="post__footer">
                             <div class="likes js-likes">
                                 <div class="likes__cta">
-                                    <a class="like-button  js-like-button" href="#" data-postid="${posts[i].id}">
+                                    <a class="like-button  js-like-button" data-postid="${posts[i].id}">
                                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                         <span class="like-button__label">Mi Piace</span>
                                     </a>
                                 </div>
                                 <div class="likes__counter">
-                                    Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+                                    Piace a <b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b> persone
                                 </div>
                             </div> 
                         </div> `
     container.appendChild(post)
 };
 
-let post = document.getElementsByClassName("post")
+let post = document.getElementsByClassName("post");
+let like = document.getElementsByClassName("like-button")
+
+let likedPost = [];
+
+for (let i = 0; i < like.length; i++) {
+    
+    like[i].addEventListener("click", function() {
+        
+        this.classList.toggle("like-button--liked");
+        let id = this.getAttribute("data-postid");
+        let numeroLike = document.getElementById(`like-counter-${id}`)
+        
+        if (likedPost.includes(id)) {
+            posts[i].likes--;
+            numeroLike.innerText = posts[i].likes;
+            likedPost = likedPost.filter((number) => {
+                console.log(number)
+                number == id 
+            })
+        } else {
+            posts[id-1].likes++;
+            numeroLike.innerText = posts[i].likes;
+            likedPost.push(id)
+        }
+        
+    })
+    
+}
